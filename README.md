@@ -1,7 +1,12 @@
 # Deploying a YouTube Clone App on AWS EKS with Jenkins and Terraform
 
-- Đây là đề tài của đồ án môn học ***Công nghệ DevOps và ứng dụng - NT548.P21***
+- Đây là đề tài của đồ án môn học ***Công nghệ DevOps và ứng dụng - NT548.P21*** do **nhóm 11** thực hiện 
 - Tên tiếng Việt: Triển khai ứng dụng YouTube trên AWS EKS với Jenkins và Terraform
+- Thành viên thực hiện:
+    - Nguyễn Duy Hùng (22520513 - MMTT2022.1)
+    - Đinh Huỳnh Gia Bảo (22520101 - MMTT2022.1)
+    - Mai Kim Trinh (22521537 - MMTT2022.3)
+    - Lê Thị Tú Uyên (22521639 - MMTT2022.3)
 
 ## Tổng quát
 
@@ -11,16 +16,38 @@
 
 ## Phân tích giải pháp
 
-### Giải pháp 1: Deploying a YouTube Clone App on AWS EKS with Jenkins and Terraform
+### Giải pháp gốc: [Giải pháp](https://medium.com/@madithatisreedhar123/devsecops-deploying-a-youtube-clone-app-on-aws-eks-with-jenkins-and-terraform-4909a6f1b299)
 
-- *Ưu điểm*: Phù hợp với cấp độ sinh viên, đơn giản hóa quy trình CI/CD, tập trung vào các công cụ phổ biến như Jenkins, Helm, và Blue/Green deployment.
+![Giải pháp gốc](/asset/reference-img.webp)
 
-- *Nhược điểm*: Vẫn sử dụng cách tiếp cận truyền thống với Jenkins, thiếu tính bảo mật và các giải pháp hiện đại như GitOps và object storage cho video.
+- **Tổng quan:** Minh họa quy trình pipeline CI/CD truyền thống có tích hợp các công cụ bảo mật (DevSecOps).
 
-- *Mô hình*:
+- **Ưu điểm:** 
+    - Có đầy đủ chuỗi CI/CD tích hợp bảo mật.
+    - Hiển thị rõ các công cụ: SonarQube (Phân tích mã nguồn), OWASP (Quét gói phụ thuộc), Trivy (Quét image).
+    - Sử dụng Terraform để triển khai Jenkins và EKS.
+
+- **Nhược điểm:**
+    - Giao diện phức tạp, thiếu sự phân tách rõ ràng giữa các tầng (Dev, CI, CD, Deploy).
+    - Không phân nhóm logic các thành phần (Monitoring, Registry, Deployment Strategy...).
+
+### Giải pháp cải tiến: Phân nhóm, áp dụng deployment strategies
+
+- **Mô hình**:
 ![Giải pháp 1](/asset/first-solution.png)
 
-- Công nghệ sử dụng: 
+- **Ưu điểm**: 
+    - Phân vùng rõ ràng: Giữa Development, CI Pipeline, CD Pipeline, Deployment Strategies, AWS Cloud.
+    - Có thêm các chiến lược triển khai: Blue/Green và Rollback → giúp tăng độ tin cậy cho production.
+    - Monitoring tốt: Kết hợp Prometheus, Grafana, CloudWatch, Slack – thể hiện tính thực tế & observability cao.
+    - Phân biệt rõ thành phần trong AWS EKS: Frontend, Backend, DB, Cache (nếu triển khai web động)
+    - Bổ sung các công cụ bảo mật (Trivy, SonaQube) trong Testing & Security.
+
+- **Nhược điểm**: 
+    - Thiếu công cụ log như Splunk (ảnh gốc có) – bạn đang có Prometheus/Grafana nhưng log system thì chưa rõ.
+    - Không có minh họa cụ thể luồng “người dùng” truy cập (frontend UI) 
+
+- **Công nghệ sử dụng**: 
 
     - Môi trường làm việc: Vscode
     - Quản lý phiên bản và lưu trữ code: Git, Github
@@ -33,31 +60,3 @@
         - Phân tích chất lượng code: SonarQube
         - Quét lỗ hổng container: Trivy
     - Giám sát và cảnh báo: Prometheus, Grafana, AWS Cloudwatch
-
-
-### Giải pháp 2: YouTube App Clone Deployment with Kubernetes, DevSecOps & ArgoCD on AWS
-
-- *Ưu điểm*: Hiện đại hơn với GitOps (ArgoCD), giải quyết vấn đề lưu trữ video (AWS S3), tối ưu hóa hiệu suất (CloudFront CDN), tự động scale (Karpenter & HPA), và tăng cường bảo mật (DevSecOps).
-
-- *Nhược điểm*: Có thể phức tạp hơn đối với sinh viên mới làm quen với DevOps, yêu cầu kiến thức sâu hơn về Kubernetes và AWS.
-
-- *Mô hình*: 
-![Giải pháp 2](/asset/second-solution.png)
-
-- *Công nghệ sử dụng*:
-
-    - Môi trường làm việc: Vscode
-    - Quản lý phiên bản và lưu trữ code: Git, Github
-    - Quản lý cơ sở hạ tầng AWS: Terraform
-    - Phân tích mã nguồn tĩnh (SAST): Sonarqube
-    - Kiểm tra lỗ hổng bảo mật động (DAST): OWASP
-    - Quét container và image để phát hiện lỗ hổng bảo mật: Trivy
-    - Triển khai theo mô hình GitOps, tự động đồng bộ hóa trạng thái mong muốn từ repository: ArgoCD
-    - Đóng gói container và lưu trữ image: Docker, Docker Hub
-    - Bảo vệ ứng dụng khỏi các cuộc tấn công web: AWS WAF
-    - Quản lý Kubernetes cluster: AWS EKS
-    - Lưu trữ video: AWS S3
-    - Phân phối nội dung đến người dùng cuối: CloudFront CDN
-    - Giám sát hiệu suất hệ thống: Prometheus, Grafana
-    - Phân tích logs: Phân tích logs
-    - Thông báo và cảnh báo: Slack
