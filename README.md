@@ -60,3 +60,9 @@
         - Phân tích chất lượng code: SonarQube
         - Quét lỗ hổng container: Trivy
     - Giám sát và cảnh báo: Prometheus, Grafana, AWS Cloudwatch
+
+- **Ghi chú:**
+    - Vì đồ án này nhắm đến mục tiêu là **CI/CD + DevSecOps**, không phải làm một trang web động có tính năng hoàn chỉnh (nếu không có yêu cầu ứng dụng phải có backend (API, database) để đánh giá end-to-end deployment).
+    - Nêu rõ lý do chọn app tĩnh: giúp tập trung vào CI/CD pipeline, IaC, DevSecOps flow.
+    - Pipeline vẫn có các bước test, scan security (cho JS packages), build image, push, deploy lên EKS.
+    - Monitoring: theo dõi pod, alert khi container chết, high CPU ...
