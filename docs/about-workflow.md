@@ -80,7 +80,7 @@
 
 -  Khi không nên chỉ dùng app tĩnh:
 
-    - Nếu giáo viênyêu cầu ứng dụng phải có `backend (API, database)` để đánh giá end-to-end deployment.
+    - Nếu giáo viên yêu cầu ứng dụng phải có `backend (API, database)` để đánh giá end-to-end deployment.
 
 > **Vì sao Terraform lại chuyển hướng đến Jenkins trước tiên và sau đó tới EKS?**
 
