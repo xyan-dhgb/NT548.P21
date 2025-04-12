@@ -176,4 +176,45 @@ Terrascan | Static analysis cho Terraform | Hợp với DevSecOps|
 
 - Jenkins server phải public hoặc dùng ngrok/nginx reverse proxy nếu chúng ta đang test local.
 
-> 
+> **Nếu một image được tạo ra thì làm sao các công cụ kiểm tra bảo mật có thể check được?**
+
+-  Việc một Docker Image được tạo ra không có nghĩa là nó “an toàn tuyệt đối”. Các công cụ security như Trivy, Grype, Clair, Snyk, Dockle, v.v. hoàn toàn có thể scan sâu bên trong Image – kể cả khi image chưa được đẩy lên DockerHub.
+
+- Docker Image là tập hợp nhiều layer filesystem, và các công cụ bảo mật sẽ phân tích các layer này theo nhiều cách:
+
+- Trích xuất metadata và layer: Các công cụ sẽ dùng Docker daemon để:
+
+    - Lấy toàn bộ các layer trong image (OS packages, libs, apps,…)
+    
+    - Đọc file hệ thống (/etc/passwd, /usr/lib, .env,…)
+
+- Từ đó, phân tích xem Image có:
+
+    - Lỗ hổng bảo mật (CVE)
+
+    - Secret/token bị lộ
+
+    - Cấu hình sai lệch (misconfiguration)
+
+-  Các thứ mà công cụ có thể "thấy" trong image:
+
+| Thành phần | Ví dụ | Phát hiện|
+|------------|-------|----------|
+|OS package	|libssl.so, curl, wget |CVE lỗ hổng|
+|App deps | node_modules, requirements.txt	|Lỗi thư viện|
+Secrets	| AWS key, API token | Cảnh báo |
+Config	| .ssh, .dockerignore	| Misconfig |
+User |	UID 0, RUN root	| Vi phạm best practice|
+
+> **Công việc của Jenkins CD jobs là pull image từ DockerHub (Jenkins CI job sau khi check security push lên)?**
+
+- Câu trả lời là chính xác. Trong quy trình DevSecOps tách biệt CI và CD, Jenkins CD job sẽ pull image từ DockerHub (hoặc container registry khác) sau khi Jenkins CI job đã build, scan và push image lên.
+
+- Tại sao nên chia CI/CD thành 2 job?
+
+|Lý do | Giải thích|
+|------|-----------|
+|Bảo mật	| Chỉ image an toàn mới được deploy|
+|Tách biệt vai trò	| CI tập trung kiểm tra, CD lo triển khai|
+|Dễ rollback |Dễ deploy lại image version trước|
+|Dễ quản lý môi trường | CD job có thể deploy vào dev, staging, prod tuỳ điều kiện|
