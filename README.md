@@ -33,8 +33,8 @@
 
 ### Giải pháp cải tiến: Phân nhóm, áp dụng deployment strategies
 
-- **Mô hình**:
-![Giải pháp 1](/asset/fixed-solution.png)
+- **Mô hình**: Xem rõ hơn ở phần [Tổng quan mô hình](/docs/about-workflow.md)
+![Giải pháp cải tiến](/asset/fixed-solution.png)
 
 - **Ưu điểm**: 
     - Phân vùng rõ ràng: Giữa Development, CI Pipeline, CD Pipeline, Deployment Strategies, AWS Cloud.
