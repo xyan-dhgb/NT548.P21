@@ -1,8 +1,9 @@
+/* Reset and Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
@@ -25,6 +26,7 @@ body {
     right: 0;
     z-index: 100;
     border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for header */
 }
 
 .left-section {
@@ -38,11 +40,12 @@ body {
     margin-right: 16px;
     cursor: pointer;
     font-size: 24px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
 }
 
 .menu-icon:hover {
     background-color: #f2f2f2;
-    border-radius: 50%;
 }
 
 .youtube-logo {
@@ -81,6 +84,11 @@ body {
     font-size: 16px;
     outline: none;
     min-width: 40px; /* Ensure minimum width */
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    border-color: #007AFF; /* Blue border on focus */
 }
 
 .search-button {
@@ -94,6 +102,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.2s ease;
 }
 
 .search-button:hover {
@@ -110,6 +119,7 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .voice-search:hover {
@@ -125,6 +135,9 @@ body {
 
 .create-button {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 40px;
     padding: 0 16px;
     margin-right: 8px;
@@ -134,18 +147,21 @@ body {
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    display: flex;
-    align-items: center;
+    transition: background-color 0.2s ease;
+    white-space: nowrap; /* Ngăn text xuống dòng */
+    overflow: hidden; /* Ngăn text tràn ra ngoài */
 }
 
-.create-button:hover {
-    background-color: #f0f0f0;
+.create-button span {
+    display: inline-block; /* Đảm bảo text hiển thị đúng */
 }
 
+/* Thêm dấu "+" vào sau chữ "Create" */
 .create-button::after {
     content: "+";
     font-size: 18px;
     margin-left: 8px;
+    display: inline-block; /* Đảm bảo luôn hiển thị */
 }
 
 .create-dropdown {
@@ -160,6 +176,7 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 101; /* Đảm bảo dropdown hiển thị trên cùng */
 }
 
 .create-button:focus-within .create-dropdown {
@@ -172,6 +189,7 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
+    transition: background-color 0.2s ease;
 }
 
 .dropdown-option:hover {
@@ -209,11 +227,12 @@ body {
     width: 240px;
     height: calc(100vh - 56px);
     background-color: #ffffff;
-    color: white;
+    color: black;
     z-index: 99;
     overflow-y: auto;
     transition: left 0.3s ease;
     padding-top: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 #sidebar-toggle:checked ~ .sidebar {
@@ -224,30 +243,6 @@ body {
     margin-left: 240px;
 }
 
-@media (max-width: 768px) {
-    #sidebar-toggle:checked ~ .main-content {
-        margin-left: 0;
-        opacity: 0.7; /* Dim the content when sidebar is shown on mobile */
-    }
-}
-
-
-/* Hide sidebar by default on mobile */
-@media (max-width: 768px) {
-    .sidebar {
-        left: -240px;
-    }
-    
-    #sidebar-toggle:checked ~ .sidebar {
-        left: 0;
-    }
-}
-
-
-#sidebar-toggle {
-    display: none;
-}
-
 .sidebar-item {
     display: flex;
     align-items: center;
@@ -255,10 +250,12 @@ body {
     cursor: pointer;
     color: black;
     text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
 }
 
 .sidebar-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #f2f2f7;
 }
 
 .sidebar-icon {
@@ -280,66 +277,27 @@ body {
     margin-top: 8px;
 }
 
-.sidebar-section {
-    padding-bottom: 12px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-section:last-child {
-    border-bottom: none;
-}
-
-.channel-avatar {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    margin-right: 24px;
-    overflow: hidden;
-    background-color: #888;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.channel-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.youtube-icon {
-    color: #ff0000;
-}
-
 .sidebar-footer {
     padding: 16px 24px;
     font-size: 13px;
+    letter-spacing: 0.5px; /* Add spacing between letters */
 }
 
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
+@media (max-width: 768px) {
+    .sidebar-footer {
+        padding: 12px 16px; /* Adjust padding for smaller screens */
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
 }
 
-.footer-links a {
-    color: #aaa;
-    text-decoration: none;
-    margin-right: 8px;
-    margin-bottom: 8px;
+@media (max-width: 480px) {
+    .sidebar-footer {
+        padding: 8px 12px; /* Further adjust padding for very small screens */
+        font-size: 11px; /* Further adjust font size for very small screens */
+    }
 }
 
-.footer-links a:hover {
-    color: #fff;
-}
-
-.copyright {
-    color: #aaa;
-    font-size: 12px;
-}
-
-/* Main Content Styles - Adjusted for sidebar */
+/* Main Content Styles */
 .main-content {
     margin-top: 56px;
     margin-left: 0; /* No default margin for sidebar */
@@ -347,201 +305,340 @@ body {
     transition: margin-left 0.3s ease;
 }
 
-/* Responsive adjustments for main content */
-@media (max-width: 768px) {
-    .main-content {
-        margin-left: 0;
+/* Sửa đổi responsive design */
+@media (max-width: 1200px) {
+    .middle-section {
+        flex: 0 1 500px;
+        margin: 0 16px;
     }
-    
-    #sidebar-toggle:checked ~ .main-content {
-        margin-left: 240px;
+
+    .create-button {
+        padding: 0 12px;
     }
 }
 
-/* Compact sidebar on medium screens */
-@media (max-width: 1100px) and (min-width: 769px) {
-    .sidebar {
-        width: 72px;
+@media (max-width: 992px) {
+    .create-button {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0 8px;
+    }
+
+    .middle-section {
+        flex: 0 1 300px;
+        margin: 0 8px;
+    }
+
+    .create-button {
+        width: auto; /* Thay đổi từ fixed width */
+        min-width: 36px; /* Thêm min-width */
+        height: 36px;
+        padding: 0 10px;
+    }
+
+    .create-button span {
+        display: none; /* Ẩn text "Create" */
+    }
+
+    .create-button::after {
+        margin-left: 0; /* Bỏ margin khi không có text */
+        font-size: 18px; /* Tăng kích thước dấu + */
+    }
+
+    .search-button {
+        width: 40px;
+    }
+
+    .menu-icon {
+        margin-right: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header {
+        padding: 0 4px;
+    }
+
+    .middle-section {
+        flex: 0 1 auto;
+        margin: 0 4px;
+    }
+
+    .search-input {
+        width: 100px;
+        min-width: 50px;
+    }
+
+    .create-button {
+        min-width: 32px;
+        height: 32px;
+        padding: 0 8px;
+    }
+
+    .create-button::after {
+        font-size: 16px;
+        display: inline-block; /* Đảm bảo dấu + luôn hiển thị */
     }
     
-    .sidebar-text, .section-title, .sidebar-footer {
+    /* Đảm bảo dropdown không bị tràn ra ngoài màn hình */
+    .create-dropdown {
+        right: -10px; /* Điều chỉnh vị trí */
+        width: 160px; /* Thu nhỏ dropdown */
+    }
+}
+
+@media (max-width: 480px) {
+    .voice-search {
+        width: 32px;
+        height: 32px;
+    }
+
+    .create-button {
+        min-width: 28px;
+        height: 28px;
+        padding: 0 6px;
+    }
+
+    .create-button::after {
+        font-size: 14px;
+        display: inline-block; /* Đảm bảo dấu + luôn hiển thị */
+    }
+
+    .avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .search-input {
+        width: 80px;
+        min-width: 40px;
+    }
+    
+    .create-dropdown {
+        width: 140px; /* Thu nhỏ dropdown hơn nữa */
+    }
+}
+
+@media (max-width: 360px) {
+    .left-section, .right-section {
+        min-width: 50px;
+    }
+
+    .search-input {
+        width: 60px;
+        min-width: 30px;
+        font-size: 14px;
+    }
+
+    .search-button {
+        width: 30px;
+    }
+    
+    /* Ẩn voice search ở màn hình rất nhỏ */
+    .voice-search {
         display: none;
     }
     
-    .sidebar-item {
-        padding: 16px 24px;
-        justify-content: center;
-    }
-    
-    .sidebar-icon, .channel-avatar {
-        margin-right: 0;
-    }
-    
-    .main-content {
-        margin-left: 72px;
-    }
-}
-
-/* Adjustments for smallest screens */
-@media (max-width: 768px) {
-    #sidebar-toggle:checked ~ .main-content {
-        margin-left: 0;
-        opacity: 0.7; /* Dim the content when sidebar is shown */
-    }
-    
-    .sidebar {
-        width: 240px;
+    /* Đảm bảo dấu + vẫn hiển thị trên màn hình cực nhỏ */
+    .create-button::after {
+        display: inline-block;
+        font-size: 12px;
     }
 }
 
 /* Main Content Styles */
 .main-content {
     margin-top: 56px;
-    padding: 24px;
-    padding-left: 24px;
-    transition: margin-left 0.3s ease;
+    padding: 16px 24px;
+    background-color: #f9f9f9; /* Light gray background */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-#sidebar-toggle:checked ~ .main-content {
-    margin-left: 240px;
+/* Filter Bar */
+.filter-bar {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 8px 0;
+    background-color: #ffffff; /* White background */
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.filter-option {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1c1c1e; /* Dark gray text */
+    background-color: #f2f2f7; /* Light gray background */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-option.active {
+    background-color: #007aff; /* Apple blue */
+    color: #ffffff; /* White text */
+}
+
+.filter-option:hover {
+    background-color: #e5e5ea; /* Slightly darker gray */
+}
+
+/* Video Grid */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 16px;
+}
+
+/* Video Preview */
+.video-preview {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /* White background */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-preview:hover {
+    transform: translateY(-4px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+}
+
+/* Thumbnail Row */
+.thumbnail-row {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    background-color: #d1d1d6; /* Placeholder gray */
+}
+
+.thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #d1d1d6; /* Placeholder gray */
+}
+
+.video-time {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff; /* White text */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    border-radius: 4px;
+}
+
+/* Video Info Grid */
+.video-info-grid {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+}
+
+.channel-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #d1d1d6; /* Placeholder gray */
+    flex-shrink: 0;
+}
+
+.video-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.video-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1e; /* Dark gray text */
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.video-author {
+    font-size: 12px;
+    color: #8e8e93; /* Light gray text */
+}
+
+.video-stats {
+    font-size: 12px;
+    color: #8e8e93; /* Light gray text */
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .middle-section {
-        flex: 0 1 500px;
-        margin: 0 16px;
+@media (max-width: 992px) {
+    .filter-bar {
+        gap: 8px;
     }
-}
 
-@media (max-width: 768px) {
-    .header {
-        padding: 0 8px; /* Reduce horizontal padding on header */
+    .filter-option {
+        font-size: 12px;
+        padding: 6px 12px;
     }
-    
-    .youtube-logo span {
-        display: none;
+
+    .video-info-grid {
+        gap: 8px;
     }
-    
-    .middle-section {
-        flex: 0 1 300px;
-        margin: 0 8px;
+
+    .channel-icon {
+        width: 32px;
+        height: 32px;
     }
-    
-    .create-button span {
-        display: none;
+
+    .video-title {
+        font-size: 13px;
     }
-    
-    .create-button {
-        width: 40px;
-        padding: 0;
-        justify-content: center;
-        margin-right: 4px; /* Reduce margin */
-    }
-    
-    .create-button::after {
-        margin-left: 0;
-    }
-    
-    .search-button {
-        width: 40px;
-    }
-    
-    .menu-icon {
-        margin-right: 8px; /* Reduce margin */
+
+    .video-author,
+    .video-stats {
+        font-size: 11px;
     }
 }
 
 @media (max-width: 576px) {
-    .header {
-        padding: 0 4px; /* Further reduce padding */
-        justify-content: space-between;
+    .filter-bar {
+        padding: 4px 0;
     }
-    
-    .middle-section {
-        flex: 0 1 auto;
-        margin: 0 4px;
-    }
-    
-    .search-input {
-        width: 100px;
-        min-width: 50px;
-    }
-    
-    /* Make sure each section maintains minimum width */
-    .left-section {
-        min-width: 70px;
-    }
-    
-    .right-section {
-        min-width: 80px;
-    }
-}
 
-@media (max-width: 480px) {
-    /* Adjust layout for very small screens */
-    .voice-search {
-        width: 32px;
-        height: 32px;
+    .filter-option {
+        font-size: 11px;
+        padding: 4px 8px;
     }
-    
-    .create-button {
-        width: 32px;
-        height: 32px;
+
+    .video-info-grid {
+        padding: 8px;
     }
-    
-    .avatar {
+
+    .channel-icon {
         width: 28px;
         height: 28px;
+    }
+
+    .video-title {
         font-size: 12px;
     }
-    
-    .search-input {
-        width: 80px;
-        min-width: 40px;
-    }
-    
-    /* Create more compact layout */
-    .left-section {
-        min-width: 60px;
-    }
-    
-    .youtube-logo svg {
-        width: 70px;
-    }
-    
-    .menu-icon {
-        font-size: 20px;
-        padding: 6px;
-    }
-}
 
-/* Ensure visibility on extreme small screens */
-@media (max-width: 360px) {
-    .left-section, .right-section {
-        min-width: 50px;
-    }
-    
-    .voice-search {
-        margin-left: 4px;
-    }
-    
-    .search-input {
-        width: 60px;
-        min-width: 30px;
-        font-size: 14px;
-    }
-    
-    .search-button {
-        width: 30px;
-    }
-    
-    /* Make sure all critical UI elements remain visible */
-    .header {
-        flex-wrap: nowrap;
-    }
-    
-    .youtube-logo svg {
-        width: 60px;
+    .video-author,
+    .video-stats {
+        font-size: 10px;
     }
 }
