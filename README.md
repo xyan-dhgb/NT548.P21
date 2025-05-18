@@ -48,7 +48,6 @@
     - Không có minh họa cụ thể luồng “người dùng” truy cập (frontend UI) 
 
 - **Công nghệ sử dụng**: 
-
     - Môi trường làm việc: Vscode
     - Quản lý phiên bản và lưu trữ code: Git, Github
     - Tối ưu hóa quy trình CI/CD: Jenkins
@@ -60,6 +59,10 @@
         - Phân tích chất lượng code: SonarQube
         - Quét lỗ hổng container: Trivy
     - Giám sát và cảnh báo: Prometheus, Grafana, AWS Cloudwatch
+
+- **Quy trình thực hiện**:    
+    - Xem ở đường dẫn sau: [Các bước thực hiện đồ án](/docs/tutorial.md)
+
 
 - **Ghi chú:**
     - Vì đồ án này nhắm đến mục tiêu là **CI/CD + DevSecOps**, không phải làm một trang web động có tính năng hoàn chỉnh (nếu không có yêu cầu ứng dụng phải có backend (API, database) để đánh giá end-to-end deployment).
