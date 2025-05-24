@@ -42,6 +42,24 @@
 - Cảnh báo:
     - Gửi cảnh báo qua Slack khi có lỗi xảy ra.
 
+## Công cụ
+
+- Terraform (IaC): Công cụ mã nguồn mở giúp quản lý hạ tầng dưới dạng mã (Infrastructure as Code), cho phép tự động hóa việc tạo, cập nhật và quản lý tài nguyên cloud (như AWS, GCP, Azure) một cách nhất quán và có thể tái sử dụng.
+
+- GitHub:  Nền tảng lưu trữ mã nguồn và cộng tác phát triển phần mềm dựa trên Git. Ngoài quản lý source code, GitHub còn tích hợp CI/CD, theo dõi issue và hỗ trợ làm việc nhóm hiệu quả.
+
+- Jenkins: Công cụ tự động hóa mã nguồn mở hỗ trợ xây dựng pipeline CI/CD. Jenkins giúp tự động build, test, deploy ứng dụng liên tục và tích hợp dễ dàng với nhiều công cụ DevOps khác.
+
+- Sonarqube: Công cụ phân tích chất lượng mã nguồn, phát hiện các lỗi, code smell và lỗ hổng bảo mật trong code. SonarQube hỗ trợ nhiều ngôn ngữ lập trình và tích hợp tốt trong pipeline CI/CD.
+
+- Trivy: Công cụ bảo mật nhẹ và nhanh dùng để quét lỗ hổng trong container image, code nguồn, các dependency (thư viện), và cấu hình hạ tầng. Phù hợp để tích hợp vào quy trình DevSecOps.
+
+- EKS: Dịch vụ Kubernetes được quản lý bởi AWS, giúp triển khai, quản lý và mở rộng các ứng dụng container hóa dễ dàng mà không cần quản lý trực tiếp control plane.
+
+- Slack: Nền tảng nhắn tin và làm việc nhóm, thường được tích hợp với Jenkins và các công cụ DevOps để nhận thông báo tự động (build status, alert, v.v.)
+
+- AWS Load Balancing: Kỹ thuật phân phối lưu lượng mạng đến nhiều server/backend nhằm tối ưu tài nguyên, đảm bảo hiệu suất và tính sẵn sàng cao cho ứng dụng.
+
 ## Các bước chi tiết
 
 ### Bước 1: Cài đặt AWS CLI
