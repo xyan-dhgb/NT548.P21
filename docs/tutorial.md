@@ -73,7 +73,11 @@ sudo ./aws/install
 
 - Cấu hình biến (variables.tf)
 
+![Variable](/asset/variable-ec2.png)
+
 - Định nghĩa tài nguyên EC2 (main.tf)
+
+![Main](/asset/main-e2.png)
 
 - Khởi tạo 2 server: Jenkins và SonarQube
 
@@ -243,6 +247,8 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 - Nhấp vào “Apply” rồi build.
 
+![Done CI](/asset/doneCIpipeline.png)
+
 - Sau khi hoàn thành các bước build và test, Docker Image sẽ được push lên Docker Hub
 
 - Kiểm tra deploy bằng Docker
@@ -267,10 +273,6 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```bash
 aws eks update-kubeconfig --region <region> --name <cluster_name>
 
-#Example
-aws eks update-kubeconfig --region us-east-1 --name YouTube-EKS-Cluster
-
-#Then run
 kubectl get pods
 ```
 
