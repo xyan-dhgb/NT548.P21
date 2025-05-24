@@ -332,6 +332,8 @@ kubectl get all
 
 - Copy DNS name của Load Balancer và dán vào trình duyệt để truy cập ứng dụng.
 
+![Access](/asset/access-ytb.jpg)
+
 ### Bước 10: Dọn dẹp tài nguyên
 
 - Trong Jenkins, tại pipeline EKS - Terraform, nhấn “Build with Parameters” và chọn action là “destroy” để bắt đầu quá trình huỷ cụm EKS và các tài nguyên liên quan.
