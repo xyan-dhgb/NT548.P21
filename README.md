@@ -53,12 +53,11 @@
     - Tối ưu hóa quy trình CI/CD: Jenkins
     - Đóng gói ứng dụng và lưu trữ image: Docker, DockerHub
     - Xây dựng cơ sở hạ tầng AWS: Terraform
-    - Quản lý cấu hình: Kubernete, Helm Charts
+    - Quản lý cấu hình: kubectl
     - Quản lý cụm Kubernetes: AWS EKS
     - Bảo mật:
         - Phân tích chất lượng code: SonarQube
         - Quét lỗ hổng container: Trivy
-    - Giám sát và cảnh báo: Prometheus, Grafana, AWS Cloudwatch
 
 - **Quy trình thực hiện**:    
     - Xem ở đường dẫn sau: [Các bước thực hiện đồ án](/docs/tutorial.md)
