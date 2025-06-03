@@ -1,0 +1,69 @@
+properties([
+    parameters([
+        choice(choices: ['apply', 'destroy'], description: 'Select Terraform action', name: 'Terraform-Action')
+    ])
+])
+
+pipeline {
+    agent any
+    stages {
+        stage('Checkout from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/dhung0811/Deploying-a-YouTube-Clone-App-on-AWS-EKS-with-Jenkins-and-Terraform.git'
+            }
+        }
+        stage('Initializing Terraform') {
+            steps {
+                withAWS(credentials: 'aws-key', region: 'us-east-1') {
+                dir('Terraform-EKS') {
+                    script {
+                        sh 'terraform init'
+                    }
+                }
+                }
+            }
+        }
+        stage('Validate Terraform Code') {
+            steps {
+                withAWS(credentials: 'aws-key', region: 'us-east-1') {
+                dir('Terraform-EKS') {
+                    script {
+                        sh 'terraform validate'
+                    }
+                }
+                }
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                withAWS(credentials: 'aws-key', region: 'us-east-1') {
+                dir('Terraform-EKS') {
+                    script {
+                        sh "terraform plan "
+                    }
+                }
+                }
+            }
+        }
+        stage('Terraform Action') {
+            steps {
+                withAWS(credentials: 'aws-key', region: 'us-east-1') { 
+                script {
+                    echo "${params.'Terraform-Action'}"
+                    dir('Terraform-EKS') {
+                        script {
+                            if (params.'Terraform-Action' == 'apply') {
+                                sh "terraform apply -auto-approve "
+                            } else if (params.'Terraform-Action' == 'destroy') {
+                                sh "terraform destroy -auto-approve "
+                            } else {
+                                error "Invalid value for Terraform-Action: ${params.'Terraform-Action'}"
+                            }
+                        }
+                    }
+                }
+                }
+            }
+        }
+    }
+}
