@@ -38,8 +38,6 @@
 
 - **Ưu điểm**: 
     - Phân vùng rõ ràng: Giữa Development, CI Pipeline, CD Pipeline, Deployment Strategies, AWS Cloud.
-    - Có thêm các chiến lược triển khai: Blue/Green và Rollback → giúp tăng độ tin cậy cho production.
-    - Monitoring tốt: Kết hợp Prometheus, Grafana, CloudWatch, Slack – thể hiện tính thực tế & observability cao.
     - Phân biệt rõ thành phần trong AWS EKS: Frontend, Backend, DB, Cache (nếu triển khai web động)
     - Bổ sung các công cụ bảo mật (Trivy, SonaQube) trong Testing & Security.
 
